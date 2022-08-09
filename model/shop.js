@@ -12,6 +12,16 @@ class ShopModel extends Http{
         devicetype : 'H5'
       }
     })
+	}
+	static getShopingInfo(qcode){
+    return Http.request({
+			url : '/api/getProduct',
+			method:'GET',
+			data:{
+				qcode
+			},
+			name:'api2'
+		})
   }
 }
 

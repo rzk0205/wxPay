@@ -24,7 +24,7 @@ static	async request({url, method = 'GET', data = {}, name = 'api1'}, options){
 		} catch (error) {
 			console.log(error);
 			wx.hideLoading()
-			_showError(error.data.code,error.data.msg)
+			// _showError(error.data.code,error.data.msg)
 		}
 		
 	}

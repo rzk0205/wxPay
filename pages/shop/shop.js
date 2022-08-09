@@ -1,12 +1,34 @@
 // pages/shop/shop.js
 import ShopModel from "../../model/shop"
+import {addCart} from "../../common/cart"
+import {navigateTo} from "../../utils/navigaet"
 Page({
 	async getBanner() {
 		const res = await ShopModel.getShopBanner()
-		console.log(res);
+		// console.log(res);
 		this.setData({
 			bannerData:res.data
 		})
+	},
+async	getShopCode(event){
+		console.log(event);
+		const qcode=event.detail
+		if(!qcode) return
+	try {
+		const res=await ShopModel.getShopingInfo(qcode)
+		console.log(res);
+		// 如果商品信息获取失败,则不继续往下执行
+		if(!res.success) return
+
+		const result=res.result
+
+		// 获取商品的数据小于等于0 , 说明没有当前条形码的商品数据,则不继续往下执行
+		if(result.length <= 0) return
+		addCart(result[0])
+		navigateTo("/pages/cart/cart")
+	} catch (error) {
+		console.log(error);
+	}
 	},
 	/**
 	 * 页面的初始数据
