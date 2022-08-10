@@ -2,6 +2,7 @@
 import ShopModel from "../../model/shop"
 import {addCart} from "../../common/cart"
 import {navigateTo} from "../../utils/navigaet"
+import Storage from '../../utils/storage'
 Page({
 	async getBanner() {
 		const res = await ShopModel.getShopBanner()
@@ -9,7 +10,7 @@ Page({
 		this.setData({
 			bannerData:res.data
 		})
-	},
+  },
 async	getShopCode(event){
 		console.log(event);
 		const qcode=event.detail
@@ -29,12 +30,26 @@ async	getShopCode(event){
 	} catch (error) {
 		console.log(error);
 	}
-	},
+  },
+  getCartList(){
+    const cartList = Storage.get("carts")
+    const  status = cartList.length > 0 ? true : false
+    const count = cartList.length
+    this.setData({
+      cartList,
+      status,
+      count
+    })
+
+  },
 	/**
 	 * 页面的初始数据
 	 */
 	data: {
-		bannerData: []
+    bannerData: [],
+    cartList:[],
+    status:false,
+    count:0
 	},
 
 	/**
@@ -55,7 +70,7 @@ async	getShopCode(event){
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow() {
-
+this.getCartList()
 	},
 
 	/**

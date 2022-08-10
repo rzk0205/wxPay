@@ -1,5 +1,7 @@
 import Storage from "../utils/storage"
-
+import ShopModel from "../model/shop"
+// import {addCart} from "../../common/cart"
+import {navigateTo} from "../utils/navigaet"
 const addCart=(data)=>{
 const carsArray=[]
 if(!hasLocalData()){
@@ -33,6 +35,25 @@ if(!hasLocalData()){
 
 }
 }
+// const getShopCode= async (event,url)=>{
+//   const qcode=event.detail
+//   if(!qcode) return
+// try {
+//   const res=await ShopModel.getShopingInfo(qcode)
+//   console.log(res);
+//   // 如果商品信息获取失败,则不继续往下执行
+//   if(!res.success) return
+
+//   const result=res.result
+
+//   // 获取商品的数据小于等于0 , 说明没有当前条形码的商品数据,则不继续往下执行
+//   if(result.length <= 0) return
+//   addCart(result[0])
+//   navigateTo(url)
+// } catch (error) {
+//   console.log(error);
+// }
+// }
 
 /**
  * 检测本地有没有存储商品的数据 (检测是否是第一次存储)

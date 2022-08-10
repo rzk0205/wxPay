@@ -1,6 +1,6 @@
 <view class="container">
 
 	<i-swiper data="{{bannerData}}"></i-swiper>
-	<i-qrcode-button bind:getResult="getShopCode"></i-qrcode-button>
+	<i-qrcode-button type="circle" count="{{count}}" status="{{status}}" bind:getResult="getShopCode"></i-qrcode-button>
 
 </view>
